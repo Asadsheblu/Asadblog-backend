@@ -47,24 +47,21 @@ async function run() {
       console.log(result);
        res.send(result);
      });
-     app.post('/api/image',upload.single('image'), (req,res)=>{
-      console.log(req.file);
-      if(!req.file){
-        res.send({code:500,msg:"err"})
-      }
-      else{
-        res.send({code:200,msg:"upload success"})
-      }
-     })
-     app.get("news",async(req,res)=>{
+    
+     app.get("/news",async(req,res)=>{
       const query={}
         const result=blogs.find(query)
-        const user=await result.toArray()
-        res.send(user)
+        const post=await result.toArray()
+        res.send(post)
         
      })
 
-   
+     app.get('/news/:id',async(req,res)=>{
+      const id=(req.params.id);
+      const query={_id:ObjectId(id)}
+      const result=await blogs.findOne(query)
+      res.send(result)
+  })
 
   } 
   finally {
