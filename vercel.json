@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "upload/index.js",
+        "use": "@now/node"
+      }
+    ],
+    "routes": [
+      {
+      
+        "src": "/(.*)",
+      
+        "dest": "upload/index.js"
+      }
+    ]
+  }
