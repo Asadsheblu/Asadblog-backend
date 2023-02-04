@@ -1,13 +1,6 @@
 const express=require("express")
 const app=express()
-const path = require('path');
-const fs = require("fs");
-const bodyParser = require("body-parser");
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:false}))
-const multer = require("multer");
-const upload = multer({ dest: '/upload' })
-const mongoose = require("mongoose")
+
 require('dotenv').config()
 const cors=require('cors');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
