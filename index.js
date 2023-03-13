@@ -33,6 +33,7 @@ async function run() {
     await client.connect();
         
     const blogs=client.db("Blog").collection("news")
+    const sPeaker=client.db("Blog").collection("speaker")
     
     app.post("/news", async (req, res) => {
       const doc=req.body
@@ -55,6 +56,28 @@ async function run() {
       const result=await blogs.findOne(query)
       res.send(result)
   })
+     app.delete('/news/:id',async(req,res)=>{
+      const id=(req.params.id);
+      const query={_id:ObjectId(id)}
+      const result=await blogs.deleteOne(query)
+      res.send(result)
+  })
+  //speaker add
+  app.post("/speakers", async (req, res) => {
+    const doc=req.body
+     const result =await sPeaker.insertOne(doc);
+    console.log(result);
+     res.send(result);
+   });
+  
+   app.get("/speakers",async(req,res)=>{
+      const query={}
+      const results= sPeaker.find(query)
+      const speaker=await results.toArray()
+      res.send(speaker)
+      
+   })
+
 
   } 
   finally {
